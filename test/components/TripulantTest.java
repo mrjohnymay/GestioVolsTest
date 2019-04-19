@@ -5,11 +5,9 @@
  */
 package components;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -27,21 +25,21 @@ public class TripulantTest {
     public void setUp() {
 
         tCabinaTest = new TripulantCabina("4609996W", "Alex", 20, 8000, "C");
-        tcpTest = new TCP("4609996W", "Alex", 20, 8000);
+        tcpTest = new TCP("56089997W", "Ivan", 20, 8000);
         tcpTest.setRang("Comandant");
-        
+
         dataAlta = new Date();
     }
 
     /*TCP*/
     @Test
     public void testGetPassaportTCP() {
-        assertEquals("4609996W", tcpTest.getPassaport());
+        assertEquals("56089997W", tcpTest.getPassaport());
     }
 
     @Test
     public void testGetNomTCP() {
-        assertEquals("Alex", tcpTest.getNom());
+        assertEquals("Ivan", tcpTest.getNom());
     }
 
     @Test
@@ -98,5 +96,26 @@ public class TripulantTest {
     @Test
     public void testGetDataAltaTripulantCabina() {
         assertEquals(dataAlta, tCabinaTest.getDataAlta());
+    }
+
+    @Test
+    public void testMostrarTCP() {
+        assertEquals("\nLes dades del tripulant de cabina amb passaport 56089997W són:", "\nLes dades del tripulant de cabina amb passaport " + tcpTest.getPassaport() + " són:");
+        assertEquals("\nNom: Ivan", "\nNom: " + tcpTest.getNom());
+        assertEquals("\nEdat: 20", "\nEdat: " + tcpTest.getEdat());
+        assertEquals("\nData d'alta: " + new SimpleDateFormat("dd-MM-yyyy").format(new Date()), "\nData d'alta: " + new SimpleDateFormat("dd-MM-yyyy").format(tcpTest.getDataAlta()));
+        assertEquals("\nHores de vol: 8000", "\nHores de vol: " + tcpTest.getHoresVol());
+        assertEquals("\nRang: Comandant", "\nRang: " + tcpTest.getRang());
+    }
+
+    @Test
+    public void testMostrarTripulantCabina() {
+        assertEquals("\nLes dades del tripulant de cabina amb passaport 4609996W són:", "\nLes dades del tripulant de cabina amb passaport " + tCabinaTest.getPassaport() + " són:");
+        assertEquals("\nNom: Alex", "\nNom: " + tCabinaTest.getNom());
+        assertEquals("\nEdat: 20", "\nEdat: " + tCabinaTest.getEdat());
+        assertEquals("\nData d'alta: " + new SimpleDateFormat("dd-MM-yyyy").format(new Date()), "\nData d'alta: " + new SimpleDateFormat("dd-MM-yyyy").format(tCabinaTest.getDataAlta()));
+        assertEquals("\nHores de vol: 8000", "\nHores de vol: "+ tCabinaTest.getHoresVol());
+        assertEquals("\nRang: Comandant", "\nRang: "+tCabinaTest.getRang());
+        assertEquals("\nBarres: 4", "\nBarres: " + tCabinaTest.getBarres() );
     }
 }

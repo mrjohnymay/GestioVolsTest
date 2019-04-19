@@ -40,5 +40,11 @@ public class ClasseTest {
     public void testGetCapacitat() {
         assertEquals(600, classeProva.getCapacitat());
     }
+    
+    @Test
+    public void mostrarClasse() {
+        assertEquals("\nLa classe A té una capacitat de 600", "\nLa classe " + classeProva.getNom() + " té una capacitat de "+classeProva.getCapacitat());
+
+    }
 
 }

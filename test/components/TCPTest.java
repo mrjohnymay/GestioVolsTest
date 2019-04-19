@@ -5,6 +5,7 @@
  */
 package components;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -30,31 +31,13 @@ public class TCPTest {
     }
     
     @Test
-    public void testGetPassaport() {
-        assertEquals("4609996W", tcpTest.getPassaport());
+    public void testMostrarComponent() {
+        assertEquals("\nLes dades del tripulant de cabina amb passaport 4609996W són:", "\nLes dades del tripulant de cabina amb passaport " + tcpTest.getPassaport() + " són:");
+        assertEquals("\nNom: Alex", "\nNom: " + tcpTest.getNom());
+        assertEquals("\nEdat: 20", "\nEdat: " + tcpTest.getEdat());
+        assertEquals("\nData d'alta: " + new SimpleDateFormat("dd-MM-yyyy").format(new Date()), "\nData d'alta: " + new SimpleDateFormat("dd-MM-yyyy").format(tcpTest.getDataAlta()));
+        assertEquals("\nHores de vol: 8000", "\nHores de vol: "+ tcpTest.getHoresVol());
+        assertEquals("\nRang: Comandant", "\nRang: "+tcpTest.getRang());
     }
-    
-    @Test
-    public void testGetNom() {
-        assertEquals("Alex", tcpTest.getNom());
-    }
-    @Test
-    public void testGetEdat() {
-        assertEquals(20, tcpTest.getEdat());
-    }
-    @Test
-    public void testGetHoresVol() {
-        assertEquals(8000, tcpTest.getHoresVol());
-    }
-    @Test
-    public void testGetRang() {
-        assertEquals("Comandant", tcpTest.getRang());
-    }
-
-    @Test
-    public void testGetDataAlta() {
-        assertEquals(dataAlta, tcpTest.getDataAlta());
-    }
-    
     
 }

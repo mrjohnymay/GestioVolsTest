@@ -87,5 +87,13 @@ public class AvioTest {
         avioProva.setPosicioClasses(2);
         assertEquals(0, avioProva.seleccionarClasse("A"));
     }
+    
+    @Test
+    public void mostrarAvio() {
+        assertEquals("\nLes dades de l'avió amb codi AB123 són:", "\nLes dades de l'avió amb codi " + avioProva.getCodi() + " són:");
+        assertEquals("\nFabricant: Airbus","\nFabricant: " + avioProva.getFabricant());
+        assertEquals("\nModel: R234", "\nModel: " + avioProva.getModel());
+        assertEquals("\nCapacitat: 600", "\nCapacitat: " + avioProva.getCapacitat());
+    }
 
 }

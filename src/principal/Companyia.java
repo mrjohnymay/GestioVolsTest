@@ -15,7 +15,6 @@ import components.TCP;
 import components.Tripulant;
 import components.TripulantCabina;
 import java.text.ParseException;
-import java.util.Scanner;
 
 /**
  *
