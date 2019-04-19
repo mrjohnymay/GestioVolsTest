@@ -85,7 +85,6 @@ public class AvioTest {
     @Test
     public void testSeleccionarClasse() {
         avioProva.setPosicioClasses(2);
-        
         assertEquals(0, avioProva.seleccionarClasse("A"));
     }
 
