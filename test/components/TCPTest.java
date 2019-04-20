@@ -7,10 +7,7 @@ package components;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -21,12 +18,10 @@ import static org.junit.Assert.*;
 public class TCPTest {
     
     private TCP tcpTest;
-    private Date dataAlta;
     
     @Before
     public void setUp() {
         tcpTest = new TCP("4609996W", "Alex", 20, 8000);
-        dataAlta = new Date();
         tcpTest.setRang("Comandant");
     }
     

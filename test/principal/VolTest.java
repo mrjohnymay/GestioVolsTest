@@ -29,12 +29,20 @@ public class VolTest {
     private Avio avioTest;
     private TripulantCabina tCabinaTest;
     private TCP tcpTest;
+    private Date dataArribada;
+    private Date dataSortida;
+    private LocalTime horaArribada;
+    private LocalTime horaSortida;
 
     @Before
     public void setUp() throws ParseException {
-        
-        //Tengo que cambiar las fechas y meterlas en variables porque sera más fácil de manipular después. Aún así no da errores, pero duele los ogos.
-        volTest = new Vol("000", new SimpleDateFormat("yyyy-MM-dd").parse("2019-04-24"), new SimpleDateFormat("yyyy-MM-dd").parse("2019-04-24"), LocalTime.parse("20:00:00"), LocalTime.parse("22:00:00"));
+
+        dataArribada = new SimpleDateFormat("yyyy-MM-dd").parse("2019-04-24");
+        dataSortida = new SimpleDateFormat("yyyy-MM-dd").parse("2019-04-24");
+        horaArribada = LocalTime.parse("22:00:00");
+        horaSortida = LocalTime.parse("20:00:00");
+
+        volTest = new Vol("000",  dataSortida, dataArribada, horaSortida, horaArribada);
 
         rutaTest = new RutaNacional("000", "Espanya", "El Prat", "Barajas", 500);
 
@@ -52,8 +60,6 @@ public class VolTest {
         volTest.getTripulacio()[volTest.getPosicioTripulacio()] = tCabinaTest;
         volTest.setPosicioTripulacio(volTest.getPosicioTripulacio() + 1);
         volTest.setCap(tcpTest);
-
-        //FALTA CALCULAR DURADA
     }
 
     @Test
@@ -84,25 +90,29 @@ public class VolTest {
     //Fecha mal
     @Test
     public void testGetDataSortida() throws ParseException {
-        assertEquals(new SimpleDateFormat("yyyy-MM-dd").parse("2019-04-24"), volTest.getDataSortida());
+        assertEquals(dataSortida, volTest.getDataSortida());
     }
 
     @Test
     public void testGetDataArribada() throws ParseException {
-        assertEquals(new SimpleDateFormat("yyyy-MM-dd").parse("2019-04-24"), volTest.getDataArribada());
+        assertEquals(dataArribada, volTest.getDataArribada());
     }
 
     @Test
     public void testGetHoraSortida() {
-        assertEquals(LocalTime.parse("20:00:00"), volTest.getHoraSortida());
+        assertEquals(horaSortida, volTest.getHoraSortida());
     }
 
     @Test
     public void testGetHoraArribada() {
-        assertEquals(LocalTime.parse("22:00:00"), volTest.getHoraArribada());
+        assertEquals(horaArribada, volTest.getHoraArribada());
     }
 
-    //FALTA GETDURADA
+    @Test
+    public void testGetDurada() {
+        assertEquals(calcularDurada(), volTest.getDurada());
+    }
+
     @Test
     public void testGetCap() {
         assertEquals(tcpTest, volTest.getCap());
@@ -145,7 +155,14 @@ public class VolTest {
         assertEquals("\nData d'alta: " + new SimpleDateFormat("dd-MM-yyyy").format(new Date()), "\nData d'alta: " + new SimpleDateFormat("dd-MM-yyyy").format(tcpTest.getDataAlta()));
         assertEquals("\nHores de vol: 8000", "\nHores de vol: " + tcpTest.getHoresVol());
         assertEquals("\nRang: Comandant", "\nRang: " + tcpTest.getRang());
-        
+
         //System.out.println("\nDurada: " + durada);
+    }
+
+    private String calcularDurada() {
+
+        long segonsDurada = (dataArribada.getTime() + (horaArribada.getHour() * 3600 + horaArribada.getMinute() * 60)) - (dataSortida.getTime() + (horaSortida.getHour() * 3600 + horaSortida.getMinute() * 60));
+
+        return (segonsDurada / 3600000) + " h - " + ((segonsDurada - (3600 * (segonsDurada / 3600))) / 60) + " m";
     }
 }
